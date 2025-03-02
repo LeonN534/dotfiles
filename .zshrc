@@ -19,19 +19,21 @@ PATH=~/.local/bin/:$PATH
 
 export FILES=/Files
 
-setxkbmap -model pc105 -layout us,es -variant , -option grp:alt_shift_toggle
-
 ## Alias
-
-alias postgres-start='sudo systemctl start postgresql.service'
-alias mariadb-start='sudo systemctl start mariadb.service'
-
-alias copy-keepass-pw='xclip -selection clipboard < /Files/Documents/Keepass/keepassxd-password.txt'
+alias pn="pnpm"
 
 eval "$(starship init zsh)"
 
 ## Plugins
-
+source ~/.zsh/dark-minimalist-syntax-highlighting.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#757480"
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# pnpm
+export PNPM_HOME="/home/leo/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

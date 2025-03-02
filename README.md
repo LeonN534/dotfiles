@@ -1,21 +1,14 @@
 # LeonN's dotfiles
 
-These are my configuration files for making a base Arch Linux installation a usable system for day-to-day work. For programs that allow color customization, I synchronized its config files to look alike by working under the same color palette. The GTK theme that applies to most of the programs is called **Dark Minimalist**, a dark theme that looks good, but it's simple enough to appear elegant. These config files have only been tested on Arch Linux. If you use another OS, some files might not work well or not work at all. 
+<img src="assets/images/preview.png" style="border-radius:6px;" />
 
-![sample1](images/sample1.png)
-
-![sample2](images/sample2.png)
-
-# Disclaimer
-
-Most of these files are modifications of [owl4ce's dotfiles](https://github.com/owl4ce/dotfiles). I did not create many files you'll see and there will be modified files from other sources that may or may not be referenced to the original author.
 # Installation
 
-The installation begins right after a clean [installation of Arch Linux](https://wiki.archlinux.org/title/installation_guide), concretely, after setting the root password. Here I like to follow some steps of [Antonio Sarosi's dotfiles](https://github.com/antoniosarosi/dotfiles). 
+The installation begins right after a clean [installation of Arch Linux](https://wiki.archlinux.org/title/installation_guide), concretely, after setting the root password. Here I like to follow some steps of [Antonio Sarosi's dotfiles](https://github.com/antoniosarosi/dotfiles).
 
 # Arch Installation
 
-First, while still in the chroot environment, you have to make sure to have working internet: 
+First, while still in the chroot environment, you have to make sure to have working internet:
 
 ```bash
 pacman -S networkmanager
@@ -79,7 +72,7 @@ nmcli device wifi connect YOUR_SSID password YOUR_PASSWORD
 ```
 
 Check [this page](https://wiki.archlinux.org/index.php/NetworkManager#nmcli_examples)
-for other options provided by *nmcli*. The last thing we need to do before
+for other options provided by _nmcli_. The last thing we need to do before
 thinking about desktop environments is installing **[Xorg](https://wiki.archlinux.org/index.php/Xorg)**:
 
 ```bash
@@ -113,14 +106,14 @@ After running the script, you will be asked to type your password sometimes. Thi
 ### **Login and window manager**
 
 As we already installed Xorg, we will install a session manager: **[lightdm](https://wiki.archlinux.org/index.php/LightDM)**. Lightdm will not
-work unless we install a **[greeter](https://wiki.archlinux.org/index.php/LightDM#Greeter)**. I use **[openbox](https://wiki.archlinux.org/title/openbox)** as window manager. Openbox has a menu for some applications when you right-click on the desktop, unfortunately, the terminal we will install is not present in that list. That's why we will have to install **[xterm](https://wiki.archlinux.org/title/Xterm)**, which is one of the terminals Openbox allows out of the box.  
+work unless we install a **[greeter](https://wiki.archlinux.org/index.php/LightDM#Greeter)**. I use **[openbox](https://wiki.archlinux.org/title/openbox)** as window manager. Openbox has a menu for some applications when you right-click on the desktop, unfortunately, the terminal we will install is not present in that list. That's why we will have to install **[xterm](https://wiki.archlinux.org/title/Xterm)**, which is one of the terminals Openbox allows out of the box.
 
 ```bash
 sudo pacman -S lightdm lightdm-gtk-greeter lightdm-webkit2-greeter openbox
 ```
-Enable *lightdm* service and restart your computer, you should be able to log into
-Openbox through *lightdm*.
 
+Enable _lightdm_ service and restart your computer, you should be able to log into
+Openbox through _lightdm_.
 
 ```bash
 sudo systemctl enable lightdm
@@ -129,7 +122,7 @@ reboot
 
 ### **Terminal**
 
-Once you have rebooted your system, you will be in the basic openbox desktop. Right-click on any part of that black screen and you will see a menu, search for *Terminals* and then *Xterm*. We will use this terminal to install another terminal: **[alacritty](https://wiki.archlinux.org/title/Alacritty)**.
+Once you have rebooted your system, you will be in the basic openbox desktop. Right-click on any part of that black screen and you will see a menu, search for _Terminals_ and then _Xterm_. We will use this terminal to install another terminal: **[alacritty](https://wiki.archlinux.org/title/Alacritty)**.
 
 ```bash
 sudo pacman -S alacritty
@@ -252,7 +245,7 @@ sudo pacman -S viewnior vlc
 For capturing an image of the screen I use **[scrot](https://archlinux.org/packages/extra/x86_64/scrot/)**. As in my dotfiles I included three ways to take screenshots(instant ss, selection ss and delayed ss), other packages are needed. Like **[imagemagick](https://wiki.archlinux.org/title/ImageMagick)** and xclip, which we already installed.
 
 ```bash
-sudo pacman -S scrot imagemagick 
+sudo pacman -S scrot imagemagick
 ```
 
 ### **AUR helper**
@@ -275,6 +268,7 @@ makepkg -si
 ```
 
 ### **Archiving and compression**
+
 To be able to compress and decompresses files we will be using **[p7zip](https://wiki.archlinux.org/title/p7zip)** as a CLI tool, and **[p7zip-gui](https://aur.archlinux.org/packages/p7zip-gui)** as a GUI tool.
 
 ```bash
@@ -305,5 +299,3 @@ cp -R alacritty dunst openbox rofi Thunar tin2 xfce4 ../../.config/
 cd ..
 sudo mkdir /usr/lib/xfce4/thunar-archive-plugin
 ```
-
-
