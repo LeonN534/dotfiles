@@ -70,13 +70,13 @@ text = "#2b2a33"
 size = 11
 
 [font.bold]
-family = "Liberation Mono"
+family = "SFMono Nerd Font"
 
 [font.italic]
-family = "Liberation Mono"
+family = "SFMono Nerd Font"
 
 [font.normal]
-family = "Liberation Mono"
+family = "SFMono Nerd Font"
 
 [window]
 opacity = 1

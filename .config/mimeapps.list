@@ -1,0 +1,16 @@
+[Default Applications]
+application/x-shellscript=code.desktop
+x-scheme-handler/postman=Postman.desktop
+application/x-trash=org.xfce.mousepad.desktop
+x-scheme-handler/figma=figma-linux.desktop
+application/x-apple-diskimage=xarchiver.desktop
+font/otf=code.desktop
+
+[Added Associations]
+application/x-shellscript=code.desktop;
+application/x-trash=org.xfce.mousepad.desktop;
+text/plain=code.desktop;
+application/x-apple-diskimage=xarchiver.desktop;
+font/otf=code.desktop;
+text/x-csrc=code.desktop;
+application/xml=code.desktop;

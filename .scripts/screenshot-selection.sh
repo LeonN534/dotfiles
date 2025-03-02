@@ -13,11 +13,15 @@ exec >/dev/null 2>&1
 
 . ${HOME}/.scripts/ss_var                                    # Variables used for taking screenshots
 
-SCREENSHOT_ICON="${HOME}/.icons/Gladient/screenshot.png"
+SCREENSHOT_ICON="/usr/share/icons/Papirus-Dark/symbolic/apps/screenshooter-symbolic.svg"
+ERROR_ICON="/usr/share/icons/Papirus-Dark/symbolic/status/dialog-error-symbolic.svg"
 
-[ -x "$(command -v scrot)" ] || exec dunstify 'Install `scrot`!' -h string:synchronous:install-deps \
-                                                                 -a "Screenshot" \
-                                                                 -u low
+[ -x "$(command -v scrot)" ] || exec notify-send -u normal \
+                -t 3000 \
+                -a Screenshot \
+                -i "$ERROR_ICON" \
+                -c screenshot-action \
+                'Command not found!' 'Install `scrot` to take screenshots.'
 
 {
     rm -f "$TMP_DIR"/*_scrot*.* &
@@ -34,10 +38,12 @@ SCREENSHOT_ICON="${HOME}/.icons/Gladient/screenshot.png"
                   -l style=dash,width=3,color=#2be491 \
                   -s \
                   -z \
-    || exec dunstify '' 'Screenshot canceled!' -h string:synchronous:screenshot-selection \
-                                                -a "Screenshot" \
-                                                -i "$SCREENSHOT_ICON" \
-                                                -u low
+    || exec notify-send -u normal \
+                -t 3000 \
+                -a Screenshot \
+                -i "$ERROR_ICON" \
+                -c screenshot-action \
+                'Screenshot canceled!' 'No window selected.'
 
     wait
 
@@ -76,17 +82,19 @@ SCREENSHOT_ICON="${HOME}/.icons/Gladient/screenshot.png"
         fi
 
         if [ -n "$SS_FRAME_COLOR" ]; then
-            dunstify '' "Processing captured picture ..\n<span size='small'>Magick ${SS_FRAME_COLOR} ..</span>" \
-                     -h string:synchronous:screenshot-selection \
-                     -a "Screenshot" \
-                     -i "$SCREENSHOT_ICON" \
-                     -t 1000
+            exec notify-send -u normal \
+                -t 3000 \
+                -a Screenshot \
+                -i "$ERROR_ICON" \
+                -c screenshot-action \
+                'Processing...' 'Please wait.'
         elif [ -n "$PRESERVED_SFC" ]; then
-            exec dunstify '' "Screenshot failed!\n<span size='small'><u>${PRESERVED_SFC}</u> isn't hex!</span>" \
-                          -h string:synchronous:screenshot-selection \
-                          -a "Screenshot" \
-                          -i "$SCREENSHOT_ICON" \
-                          -u low
+            exec notify-send -u normal \
+                -t 3000 \
+                -a Screenshot \
+                -i "$ERROR_ICON" \
+                -c screenshot-action \
+                'Screenshot failed' 'Invalid color value.'
         fi
 
         magick "ephemeral:${TMP_DIR}/${CURRENT}" \
@@ -121,11 +129,12 @@ SCREENSHOT_ICON="${HOME}/.icons/Gladient/screenshot.png"
                -border 5 \
                -quality "${SS_QUALITY:-75}" \
         "${TMP_DIR}/${CURRENT}" \
-        || exec dunstify '' "Screenshot failed!\n<span size='small'>Error occurred in ImageMagick!</span>" \
-                         -h string:synchronous:screenshot-selection \
-                         -a "Screenshot" \
-                         -i "$SCREENSHOT_ICON" \
-                         -u low
+        || exec notify-send -u normal \
+                -t 3000 \
+                -a Screenshot \
+                -i "$ERROR_ICON" \
+                -c screenshot-action \
+                'Screenshot failed!' 'An error occurred.'
 
     fi
 
@@ -150,11 +159,12 @@ SCREENSHOT_ICON="${HOME}/.icons/Gladient/screenshot.png"
         STS2='CLIPBOARD'
     fi
 
-    exec dunstify 'Screenshot' "<span size='small'><u>${STS1}</u><i>${STS2}</i></span>\nPicture obtained!" \
-                  -h string:synchronous:screenshot-selection \
-                  -a "Screenshot" \
-                  -i "$SCREENSHOT_ICON" \
-                  -u low
+    exec notify-send -u normal \
+                -t 4000 \
+                -a Screenshot \
+                -i "$SCREENSHOT_ICON" \
+                -c screenshot-action \
+                'Screenshot' 'Successfully taken!'
 } &
 
 exit ${?}

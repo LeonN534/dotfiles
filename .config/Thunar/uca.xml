@@ -1,60 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
 <action>
-	<icon>view-media-playlist</icon>
-	<name>Extract here</name>
-	<submenu></submenu>
-	<unique-id>1717959180743925-2</unique-id>
-	<command>/home/leo/.scripts/extraction-actions.sh extract_here %F</command>
-	<description>Extract the selected files in the current directory</description>
-	<range>*</range>
-	<patterns>*.7z;*.xz;*.bz2;*.gz;*.tar;*.zip;*.wim;*.apfs;*.a;*.arj;*.cab;*.chm;*.cpio;*.cramfs;*.dmg;*.ext;*.fat;*.gpt;*.hfs;*.ihex;*.iso;*.lzh;*.lzma;*.mbr;*.msi;*.nsis;*.ntfs;*.qcow2;*.rar;*.rpm;*.squashfs;*.udf;*.uefi;*.vdi;*.vhd;*.vhdx;*.vmdk;*.xar;*.z</patterns>
-	<other-files/>
-</action>
-<action>
-	<icon>folder-dark-minimalist-blue-documents</icon>
-	<name>Extract in new folder</name>
-	<submenu></submenu>
-	<unique-id>1717957843732257-1</unique-id>
-	<command>/home/leo/.scripts/extraction-actions.sh extract_in_folder %F</command>
-	<description>Creates a new folder in the current directory with the name of the file and extract its contents there</description>
-	<range>*</range>
-	<patterns>*.7z;*.xz;*.bz2;*.gz;*.tar;*.zip;*.wim</patterns>
-	<other-files/>
-</action>
-<action>
-	<icon>archive</icon>
-	<name>Add files to...</name>
-	<submenu></submenu>
-	<unique-id>1717957077889824-2</unique-id>
-	<command>/home/leo/.scripts/extraction-actions.sh add_files %F</command>
-	<description>Add the selected files to a new zip files</description>
-	<range>*</range>
-	<patterns>*</patterns>
-	<directories/>
-	<audio-files/>
-	<image-files/>
-	<other-files/>
-	<text-files/>
-	<video-files/>
-</action>
-<action>
 	<icon>utilities-terminal</icon>
 	<name>Open Terminal Here</name>
 	<submenu></submenu>
-	<unique-id>1679199557976277-1</unique-id>
-	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
-	<description>Open a terminal in the current directory</description>
+	<unique-id>1738909611473613-1</unique-id>
+	<command>$HOME/.scripts/spawn-alacritty.sh %f</command>
+	<description>Open terminal emulator in the current directory</description>
 	<range></range>
 	<patterns>*</patterns>
 	<startup-notify/>
 	<directories/>
 </action>
 <action>
+	<icon>vscode</icon>
+	<name>Open with Code</name>
+	<submenu></submenu>
+	<unique-id>1739065637335496-1</unique-id>
+	<command>code %f</command>
+	<description>Open the selected directory with Visual Studio Code</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
 	<icon>edit-copy</icon>
 	<name>Copy path</name>
 	<submenu></submenu>
-	<unique-id>1682452206636879-1</unique-id>
+	<unique-id>1739065704869793-2</unique-id>
 	<command>echo -n &quot;%F&quot; | xclip -selection c</command>
 	<description>Copy the absolute path of the file/folder to the clipboard</description>
 	<range>*</range>
@@ -65,16 +38,5 @@
 	<other-files/>
 	<text-files/>
 	<video-files/>
-</action>
-<action>
-	<icon>visual-studio-code</icon>
-	<name>Open in Code</name>
-	<submenu></submenu>
-	<unique-id>1717956466510732-1</unique-id>
-	<command>code %f</command>
-	<description>Open directory in VSCode</description>
-	<range></range>
-	<patterns>*</patterns>
-	<directories/>
 </action>
 </actions>

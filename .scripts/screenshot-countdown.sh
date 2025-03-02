@@ -13,11 +13,15 @@ exec >/dev/null 2>&1
 
 . ${HOME}/.scripts/ss_var                                   # Variables used for taking screenshots
 
-SCREENSHOT_ICON="${HOME}/.icons/Gladient/screenshot.png"
+SCREENSHOT_ICON="/usr/share/icons/Papirus-Dark/symbolic/apps/screenshooter-symbolic.svg"
+ERROR_ICON="/usr/share/icons/Papirus-Dark/symbolic/status/dialog-error-symbolic.svg"
 
-[ -x "$(command -v scrot)" ] || exec dunstify 'Install `scrot`!' -h string:synchronous:install-deps \
-                                                                 -a "Screenshot" \
-                                                                 -u low
+[ -x "$(command -v scrot)" ] || exec notify-send -u normal \
+                -t 3000 \
+                -a Screenshot \
+                -i "$ERROR_ICON" \
+                -c screenshot-action \
+                'Command not found!' 'Install `scrot` to take screenshots.'
 
 {
     # Add 210ms delay to trick compositor fade animation.
@@ -48,25 +52,30 @@ SCREENSHOT_ICON="${HOME}/.icons/Gladient/screenshot.png"
 
     [ "$SS_POINTER" != 'yes' ] || ARGS='-p'
 
-    dunstify '' "Taken in ${SS_COUNTDOWN_SECONDS:-5}s .." -h string:synchronous:screenshot-countdown \
-                                                           -a "Screenshot" \
-                                                           -i "$SCREENSHOT_ICON" \
-                                                           -t 1000
+    notify-send -u normal \
+                -t 1000 \
+                -a Screenshot \
+                -i "$SCREENSHOT_ICON" \
+                -c screenshot-action \
+                "Taken in ${SS_COUNTDOWN_SECONDS:-5}s ..."
 
     scrot ${ARGS} -d "${SS_COUNTDOWN_SECONDS:-5}" \
                   -e "$EXEC" \
                   -q "${SS_QUALITY:-75}" \
                   -z \
-    || exec dunstify '' 'Screenshot failed!' -h string:synchronous:screenshot-countdown \
-                                              -a "Screenshot" \
-                                              -i "$SCREENSHOT_ICON" \
-                                              -u low
+    || exec notify-send -u normal \
+                -t 3000 \
+                -a Screenshot \
+                -i "$ERROR_ICON" \
+                -c screenshot-action \
+                'Screenshot failed!' 'An error occurred.'
 
-    exec dunstify 'Screenshot' "<span size='small'><u>${STS1}</u><i>${STS2}</i></span>\nPicture obtained!" \
-                  -h string:synchronous:screenshot-countdown \
-                  -a "Screenshot" \
-                  -i "$SCREENSHOT_ICON" \
-                  -u low
+    exec notify-send -u normal \
+                -t 4000 \
+                -a Screenshot \
+                -i "$SCREENSHOT_ICON" \
+                -c screenshot-action \
+                'Screenshot' 'Successfully taken!'
 } &
 
 exit ${?}
